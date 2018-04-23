@@ -1,0 +1,39 @@
+%boxShadow{
+  // material design box shadow
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+%msg {
+  font-size: $fontsize-medium;
+  line-height: 20px;
+  margin-top: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+}
+
+%swipeableCard {
+  color: $black;
+  cursor: pointer;
+  header {
+    img {
+      float: left;
+      margin-right: 15px;
+      border-radius: 30px;
+      background-image: url('./../images/silhouette.png');
+      background-size: contain;
+    }
+    .name {
+      font-weight: $fontWeight-bold;
+      font-size: $fontsize-medium;
+    }
+    .time {
+      font-size: $fontsize-small;
+    }
+  }
+  .msg {
+    @extend %msg;
+  }
+}

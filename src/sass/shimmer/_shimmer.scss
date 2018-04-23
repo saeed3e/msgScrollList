@@ -1,0 +1,93 @@
+// Third pary open source css responsible to create a shimmer effect
+.initialShimmer{
+  height: 100%;
+  padding: 10px 15px;
+}
+
+.timeline-wrapper {
+  width: 100%;
+}
+.timeline-item {
+  background: $white;
+  border: none;
+  border-radius: 3px;
+  padding: 12px 25px;
+  margin: 0 auto;
+  min-height: 145px;
+  margin: 0.5rem 0 1rem 0;
+}
+@keyframes placeHolderShimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+.animated-background {
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+  background: $color_black_haze_approx;
+  background: linear-gradient(
+    to right,
+    $mercury 8%,
+    $color_wild_sand_approx 18%,
+    $mercury 33%
+  );
+  background-size: 800px 104px;
+  height: 110px;
+  position: relative;
+}
+.background-masker {
+  background: $white;
+  position: absolute;
+  &.header-bottom {
+    top: 0;
+    left: 40px;
+    right: 0;
+    top: 10px;
+    height: 10px;
+  }
+  &.subheader-bottom {
+    top: 0;
+    left: 40px;
+    right: 0;
+    top: 30px;
+    height: 10px;
+  }
+  &.header-left {
+    top: -1px;
+    left: 40px;
+    height: 11px;
+    width: 25px;
+  }
+  &.subheader-left {
+    left: 40px;
+    height: 11px;
+    width: 25px;
+    top: 20px;
+    height: 10px;
+  }
+  &.content-third-line {
+    left: 0;
+    right: 0;
+    height: 15px;
+    top: 60px;
+  }
+  &.content-fourth-line {
+    left: 0;
+    right: 0;
+    height: 15px;
+    top: 85px;
+  }
+  &.content-first-end {
+    width: auto;
+    left: 0;
+    right: 0;
+    top: 40px;
+    height: 10px;
+  }
+}

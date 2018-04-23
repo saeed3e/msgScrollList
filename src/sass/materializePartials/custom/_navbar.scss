@@ -1,0 +1,52 @@
+$navbarHeight:56px;
+
+.navbar-fixed {
+  position: relative;
+  height: $navbarHeight;
+  z-index: 997;
+  nav {
+    position: fixed;
+    width: 100%;
+    background-color: $navbarBackgroundColor;
+    color: $navbarColor;
+    height: $navbarHeight;
+    line-height: $navbarHeight;
+    a {
+      color:$white;
+    }
+    .nav-wrapper {
+      position: relative;
+      height: 100%;
+    }
+    .brand-logo {
+      font-size: 1.43rem;
+      position: absolute;
+      display: inline-block;
+    }
+    .sidenav-trigger {
+      width: 3em;
+      text-align: center;
+      margin: 0 20px 0 8px;
+      float: left;
+      position: relative;
+      height: $navbarHeight;
+    }
+  }
+
+  .box-shadow-menu {
+    position: relative;
+    padding-left: 1em;
+    font-size: 21px;
+    &:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.25em;
+      width: 1em;
+      height: 0.1em;
+      background: #fff;
+      box-shadow: 0 0.25em 0 0 #fff, 0 0.5em 0 0 #fff;
+    }
+  }
+}
+

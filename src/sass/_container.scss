@@ -1,0 +1,11 @@
+html,body, #root{
+    height: 100%;
+}
+
+body{
+    overflow-y: hidden;
+}
+
+.msgCont{
+    height: calc(100% - 64px);
+}

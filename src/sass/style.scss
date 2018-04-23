@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+@import "./_variables";
+
+// Material design sass with removed unwanted code
+@import "./materializePartials/_materrial.scss";
+
+// Tuple Container
+@import "./_container.scss";
+
+// Message tuple
+@import "./card/_card.scss";
+
+// Message shimmer
+@import "./shimmer/_shimmer.scss";
