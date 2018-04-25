@@ -9,3 +9,8 @@ body{
 .msgCont{
     height: calc(100% - 64px);
 }
+
+.dummyNode{
+    position: absolute;
+    transform: translateX(-2000px)
+}

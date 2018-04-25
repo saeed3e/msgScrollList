@@ -24,6 +24,11 @@ import { Swipe } from "./../swipe/index.jsx";
 import { MessageCard } from "./MessageCard.jsx";
 
 /**
+ * Get the cross browser scrollWidth
+ */
+import { getScrollbarWidth } from "./../../lib/scrollWidth/index.js";
+
+/**
  * Common configuration file contain all the API paths used in the application
  */
 import { config } from "./../../config/config.js";
@@ -35,13 +40,43 @@ export class MessageContainer extends PureComponent {
      * contain next message token reference for lazy loading of messages
      */
     this.nextToken = "";
+    
     /**
      * State object contain msgList array to store messages
      */
     this.state = {
       msgList: []
     };
+
+    // Define card top spacing from eachother in pixel;
+    this.cardTopSpacing = 8;
+
+    //cardLeftMargin from window in percentage.
+    this.cardLeftMargin = 20;
+
+    //cardLeftPadding from window in pixel.
+    this.cardLeftPadding = 21;
+
+    //header height of card in pixel
+    this.cardHeaderHeight = 42;
+    
+    //cardTopBottom height in pixel
+    this.cardTopBottomPadding = 22 * 2;
+    
+    // card contect top margin in pixel
+    this.cardContentTopMargin = 12;
   }
+
+  dummyNodetoFindout_contentWidth = () => {
+    /**
+     * calculate the height of message's content, to set dynamic height on each card
+     */
+    var test = document.createElement("div");
+    test.classList.add("block-with-text", "dummyNode");
+    test.style.width = window.innerWidth - 2*(this.cardLeftMargin  + this.cardLeftPadding + getScrollbarWidth())+'px',
+    document.body.appendChild(test);
+    return test;
+  };
 
   /**
    * This function responsible to get data from server and update the MessageContainer
@@ -56,23 +91,15 @@ export class MessageContainer extends PureComponent {
       .then(data => {
         this.nextToken = data.pageToken;
 
-        /**
-         * calculate the height of message's content, to set dynamic height on each card
-         */
-        var test = document.createElement("div");
-        test.classList.add("block-with-text");
-        test.style.width = "288px";
-        test.style.position = "absolute";
-        test.style.transform = "translateX(-2000px)";
-        document.body.appendChild(test);
+        const dummyNode = this.dummyNodetoFindout_contentWidth();
 
         // Adding new height key in message object based on the height of the content
         data.messages.map((value, index) => {
-          test.innerText = value.content;
-          value.height = test.clientHeight + 8;
+          dummyNode.innerText = value.content;
+          value.height = dummyNode.clientHeight + this.cardTopSpacing;
           return value;
         });
-        test.remove();
+        dummyNode.remove();
 
         /**
          * Update internal state of the component with new messages
@@ -84,7 +111,7 @@ export class MessageContainer extends PureComponent {
   };
 
   /**
-   * Responsible for rendering a single row, given its index. 
+   * Responsible for rendering a single row, given its index.
    */
   rowRenderer = ({
     key, // Unique key within array of rows
@@ -96,12 +123,11 @@ export class MessageContainer extends PureComponent {
     // Created a modified object as per need
     let modifiedStyle = {
       ...style,
-      width: parseInt(style.width) - 8.33 + "%",
-      left: 4.17 + "%",
-      top: style.top + 15
+      width: `calc(100% - ${2*this.cardLeftMargin}px)`,
+      left: this.cardLeftMargin + "px",
+      top: style.top + (2 * this.cardTopSpacing)
     };
 
-    
     if (this.state.msgList[index]) {
       // if message exist at give index then draw the message card
 
@@ -168,26 +194,19 @@ export class MessageContainer extends PureComponent {
     let { msgList } = this.state;
     let listSize = !msgList.length ? 1 : msgList.length + 1;
 
-    let headerHeight = 42;
-    let cardTopBottomPadding = 22 * 2;
-    let contentTopMargin = 12;
-
     return (
       <div className="msgCont">
         <Swipe
           onCardDismissed={this.onCardDismissed}
           parentNodeSelector={".msgCont"}
           targetNodeClass={"swipeableCard"}>
-
           <InfiniteLoader
             isRowLoaded={this.isRowLoaded}
             loadMoreRows={() => this.getDataFromServer()}
             rowCount={listSize}>
             {({ onRowsRendered, registerChild }) => (
-
               <AutoSizer className="card-container">
                 {({ height, width }) => (
-
                   <List
                     ref={registerChild}
                     onRowsRendered={onRowsRendered}
@@ -197,9 +216,9 @@ export class MessageContainer extends PureComponent {
                     rowHeight={({ index }) => {
                       const rowHeight = msgList[index]
                         ? msgList[index].height +
-                          headerHeight +
-                          cardTopBottomPadding +
-                          contentTopMargin
+                          this.cardHeaderHeight +
+                          this.cardTopBottomPadding +
+                          this.cardContentTopMargin
                         : 175;
                       return rowHeight;
                     }}

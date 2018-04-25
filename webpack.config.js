@@ -4,14 +4,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const extractSass = new ExtractTextPlugin({
-    filename: "style.css",
+    filename: "style_v2.css",
     disable: process.env.NODE_ENV === "development"
 });
 
 module.exports = {
   entry: {
-    app: './src/index.jsx',
-    vendor: ['react','react-dom','prop-types','react-virtualized', './src/lib/timeago/index.js']
+    app_v2: './src/index.jsx',
+    vendor_v2: ['react','react-dom','prop-types','react-virtualized', './src/lib/timeago/index.js']
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -21,7 +21,7 @@ module.exports = {
     splitChunks: {
         cacheGroups: {
             commons: {
-                name: "vendor",
+                name: "vendor_v2",
                 chunks: "initial",
                 minChunks: 2
             }
@@ -90,7 +90,7 @@ module.exports = {
     },
     plugins: [
         extractSass,
-        // new CleanWebpackPlugin(['dist']),
+        new CleanWebpackPlugin(['dist']),
         new HtmlWebpackPlugin({
             title: 'Photo Gallery app',
             template: "./src/index.html",
