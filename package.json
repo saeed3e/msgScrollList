@@ -6,7 +6,8 @@
     "test": "nodemon node server.js",
     "start": "webpack-dev-server --open",
     "dev": "webpack",
-    "prod": "webpack -p"
+    "prod": "webpack -p",
+    "build": "webpack -p"
   },
   "repository": {
     "type": "git",
