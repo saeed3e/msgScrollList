@@ -7,7 +7,7 @@
     "start": "webpack-dev-server --open",
     "dev": "webpack",
     "prod": "webpack -p",
-    "build": "webpack -p"
+    "build": "webpack -p build --output public"
   },
   "repository": {
     "type": "git",
