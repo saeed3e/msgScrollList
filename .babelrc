@@ -1,14 +1,6 @@
 {
-  presets: ["react", ['env',
-  {
-      modules: false
-  }],"stage-0"],
-  plugins: [
-      ["transform-object-rest-spread",
-      {
-          "useBuiltIns": true
-      }],
-      "transform-function-bind", ["transform-react-jsx"],
-      "syntax-dynamic-import"
-  ]
+    "presets": [
+        "@babel/preset-env",
+        "@babel/preset-react"
+    ]
 }
