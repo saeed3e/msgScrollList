@@ -37,7 +37,6 @@ jobs:
         with:
           # Upload entire repository
           path: '.'
-          working-directory: ./public
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
