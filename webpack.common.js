@@ -51,7 +51,8 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'Photo Gallery app',
+            title: 'Infinitely Scrolling Message List(Virtualization)',
+            filename: isProduction ? '../index.html' : 'index.html'
         }),
         new MiniCssExtractPlugin({
             filename: isProduction ? "css/[name].[contenthash].css" : "[name].css",
