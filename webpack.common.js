@@ -8,9 +8,10 @@ module.exports = {
         app: './src/index.jsx'
     },
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: isProduction ? '[name].[contenthash].js' : '[name].js',
-        clean: true
+        path: path.resolve(__dirname, 'public'),
+        filename: isProduction ? 'js/[name].[contenthash].js' : '[name].js',
+        clean: true,
+        assetModuleFilename: 'images/[hash][ext][query]'
     },
     module: {
         rules: [
@@ -25,10 +26,8 @@ module.exports = {
                 }
             },
             {
-                test: /\.s[ac]ss$/i,
+                test: /\.(sa|sc|c)ss$/i,
                 use: [
-                    // Creates `style` nodes from JS strings
-                    // "style-loader",
                     MiniCssExtractPlugin.loader,
                     // Translates CSS into CommonJS
                     {
@@ -40,7 +39,7 @@ module.exports = {
                         options: {
                             // Prefer `dart-sass`
                             implementation: require("sass"),
-                        },
+                        }
                     },
                 ],
             },
@@ -55,7 +54,7 @@ module.exports = {
             title: 'Photo Gallery app',
         }),
         new MiniCssExtractPlugin({
-            filename: isProduction ? "[name].[contenthash].css" : "[name].css",
+            filename: isProduction ? "css/[name].[contenthash].css" : "[name].css",
         })
     ]
 };
